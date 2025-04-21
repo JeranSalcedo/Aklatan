@@ -8,12 +8,12 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <Image source={TempImage} style={styles.image} />
-      <Text style={styles.title}>Welcome to Aklatan</Text>
-      <Text style={styles.subtitle}>test</Text>
+      <Text style={styles.title}>Aklatan</Text>
+      <Text style={styles.subtitle}>Personal library management app.</Text>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push('/talaan')}
+        onPress={() => router.push('/koleksyon')}
       >
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>

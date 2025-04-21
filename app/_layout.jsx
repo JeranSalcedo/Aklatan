@@ -20,6 +20,7 @@ const RootLayout = () => {
       }}
     >
       <Stack.Screen name='index' options={{ title: 'Home' }} />
+      <Stack.Screen name='koleksyon' options={{ headerTitle: 'Koleksyon' }} />
       <Stack.Screen name='talaan' options={{ headerTitle: 'Talaan' }} />
     </Stack>
   );
