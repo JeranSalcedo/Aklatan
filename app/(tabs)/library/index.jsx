@@ -124,7 +124,7 @@ const LibraryScreen = () => {
         style={styles.addButton}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.addButtonText}>+ Add</Text>
+        <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
 
       <LibraryModal
@@ -145,14 +145,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   addButton: {
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-    backgroundColor: '#db8c61',
-    padding: 15,
-    borderRadius: 8,
     alignItems: 'center',
+    backgroundColor: '#db8c61',
+    borderColor: 'rgba(0,0,0,0.2)',
+    borderWidth: 1,
+    borderRadius: 30,
+    justifyContent: 'center',
+    width: 60,
+    height: 60,
+    position: 'absolute',
+    bottom: 15,
+    right: 15,
+    padding: 15,
   },
   addButtonText: {
     color: '#fff',
