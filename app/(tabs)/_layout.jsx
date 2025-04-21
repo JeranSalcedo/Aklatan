@@ -41,7 +41,7 @@ const RootLayout = () => {
           title: 'Library',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-              name={focused ? 'book' : 'book-outline'}
+              name={focused ? 'library' : 'library-outline'}
               color={color}
               size={20}
             />
@@ -55,6 +55,19 @@ const RootLayout = () => {
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? 'document' : 'document-text-outline'}
+              color={color}
+              size={20}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name='profile'
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name={focused ? 'person-circle' : 'person-circle-outline'}
               color={color}
               size={20}
             />
