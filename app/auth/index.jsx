@@ -10,6 +10,8 @@ import {
 const AuthScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(false);
 
   return (
@@ -35,13 +37,27 @@ const AuthScreen = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
+      {isLogin ? null : (
+        <TextInput
+          style={styles.input}
+          placeholder='Confirm Password'
+          placeholderTextColor='#aaa'
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry
+        />
+      )}
 
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>
+          {isLogin ? 'Login' : 'Request account'}
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => null}>
-        <Text style={styles.requestText}>Request account</Text>
+      <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
+        <Text style={styles.requestText}>
+          {isLogin ? 'Request account' : 'I already have an account'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
