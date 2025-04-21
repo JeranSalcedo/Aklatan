@@ -15,7 +15,14 @@ const Home = () => {
         style={styles.button}
         onPress={() => router.push('/koleksyon')}
       >
-        <Text style={styles.buttonText}>Get Started</Text>
+        <Text style={styles.buttonText}>Koleksyon</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push('/talaan')}
+      >
+        <Text style={styles.buttonText}>Talaan</Text>
       </TouchableOpacity>
     </View>
   );
@@ -49,6 +56,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#db8c61',
+    width: 150,
+    margin: 5,
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 8,
