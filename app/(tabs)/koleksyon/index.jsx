@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff2f1',
+    backgroundColor: '#fff',
   },
   addButton: {
     position: 'absolute',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addButtonText: {
-    color: '#fff2f1',
+    color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
