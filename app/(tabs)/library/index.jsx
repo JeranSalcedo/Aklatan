@@ -7,6 +7,9 @@ import {
   Alert,
 } from 'react-native';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'expo-router';
+
+import { useAuth } from '@/contexts/AuthContext';
 
 import Library from '@/components/Library';
 import LibraryModal from '@/components/LibraryModal';
@@ -14,6 +17,9 @@ import LibraryModal from '@/components/LibraryModal';
 import booksService from '@/services/booksService';
 
 const LibraryScreen = () => {
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
+
   const [library, setLibrary] = useState([]);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -23,8 +29,16 @@ const LibraryScreen = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchBooks();
-  }, []);
+    if (!authLoading && !user) {
+      router.replace('/auth');
+    }
+  }, [user, authLoading]);
+
+  useEffect(() => {
+    if (user) {
+      fetchBooks();
+    }
+  }, [user]);
 
   const addBook = async () => {
     if (newBook.trim() === '') return;
@@ -50,7 +64,7 @@ const LibraryScreen = () => {
 
     if (response.error) {
       setError(response.error);
-      Alert.alert('[ERROR]', response.error);
+      Alert.alert('Error', response.error);
     } else {
       setLibrary(response.data);
       setError(null);
@@ -61,7 +75,7 @@ const LibraryScreen = () => {
 
   const updateBook = async (id, data) => {
     if (!data.title.trim()) {
-      Alert.alert('[ERROR]', 'New title cannot be empty.');
+      Alert.alert('Error', 'New title cannot be empty.');
 
       return;
     }
@@ -70,7 +84,7 @@ const LibraryScreen = () => {
 
     if (response.error) {
       setError(response.error);
-      Alert.alert('[ERROR]', response.error);
+      Alert.alert('Error', response.error);
     } else {
       setLibrary((previousLibrary) =>
         previousLibrary.map((book) =>
@@ -95,7 +109,7 @@ const LibraryScreen = () => {
 
           if (response.error) {
             setError(response.error);
-            Alert.alert('[ERROR]', response.error);
+            Alert.alert('Error', response.error);
           } else {
             setLibrary(library.filter((book) => book.$id !== id));
             setError(null);

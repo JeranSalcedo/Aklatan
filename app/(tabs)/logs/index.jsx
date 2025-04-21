@@ -1,14 +1,26 @@
 import { View, StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'expo-router';
+
+import { useAuth } from '@/contexts/AuthContext';
 
 import Logs from '@/components/Logs';
 
 const LogsScreen = () => {
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
+
   const [logs, setLogs] = useState([
     { id: '1', text: 'log_1' },
     { id: '2', text: 'log_2' },
     { id: '3', text: 'log_3' },
   ]);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace('/auth');
+    }
+  }, [user, authLoading]);
 
   return (
     <View style={styles.container}>
