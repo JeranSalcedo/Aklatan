@@ -19,9 +19,13 @@ const RootLayout = () => {
         },
       }}
     >
-      <Stack.Screen name='index' options={{ title: 'Home' }} />
+      <Stack.Screen
+        name='index'
+        options={{ title: 'Home', headerLeft: () => <></> }}
+      />
       <Stack.Screen name='koleksyon' options={{ headerTitle: 'Koleksyon' }} />
       <Stack.Screen name='talaan' options={{ headerTitle: 'Talaan' }} />
+      <Stack.Screen name='not-found' options={{ headerShown: false }} />
     </Stack>
   );
 };
