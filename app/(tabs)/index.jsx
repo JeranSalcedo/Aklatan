@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import TempImage from '@/assets/images/react-logo.png';
 
-const Home = () => {
+const HomeScreen = () => {
   const router = useRouter();
 
   return (
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;
