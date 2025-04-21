@@ -1,9 +1,66 @@
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
+import { useState, useRef } from 'react';
 
-const AklatanItem = ({ item }) => {
+const AklatanItem = ({ item, onEdit, onDelete }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState(item.title);
+
+  const inputRef = useRef(null);
+
+  const handleSave = () => {
+    if (newTitle.trim() === '') return;
+
+    const data = {
+      title: newTitle,
+      author: item.author,
+    };
+
+    onEdit(item.$id, data);
+    setIsEditing(false);
+  };
+
   return (
     <View style={styles.item}>
-      <Text style={styles.itemText}>{item.text}</Text>
+      {isEditing ? (
+        <TextInput
+          ref={inputRef}
+          style={styles.input}
+          value={newTitle}
+          onChangeText={setNewTitle}
+          autoFocus
+          onSubmitEditing={handleSave}
+          returnKeyType='done'
+        />
+      ) : (
+        <Text style={styles.itemText}>
+          {item.title} {item.author}
+        </Text>
+      )}
+      <View style={styles.actions}>
+        {isEditing ? (
+          <TouchableOpacity
+            onPress={() => {
+              handleSave();
+              inputRef.current?.blur();
+            }}
+          >
+            <Text style={styles.edit}>💾</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => setIsEditing(true)}>
+            <Text style={styles.edit}>✏️</Text>
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity onPress={() => onDelete(item.$id, item.title)}>
+          <Text style={styles.delete}>❌</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -20,6 +77,18 @@ const styles = StyleSheet.create({
   itemText: {
     color: '#5e4646',
     fontSize: 18,
+  },
+  actions: {
+    flexDirection: 'row',
+  },
+  edit: {
+    fontSize: 18,
+    marginRight: 10,
+    color: 'blue',
+  },
+  delete: {
+    fontSize: 18,
+    color: 'red',
   },
 });
 

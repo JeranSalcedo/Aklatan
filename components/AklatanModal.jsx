@@ -6,23 +6,14 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
-import { useState } from 'react';
 
-const AklatanModal = ({ modalVisible, setModalVisible, setAklatan }) => {
-  const [temp, setTemp] = useState('');
-
-  const addTala = () => {
-    if (temp.trim() === '') return;
-
-    setAklatan((allAklat) => [
-      ...allAklat,
-      { id: allAklat.length + 1, text: temp },
-    ]);
-
-    setTemp('');
-    setModalVisible(false);
-  };
-
+const AklatanModal = ({
+  modalVisible,
+  setModalVisible,
+  newAklat,
+  setNewAklat,
+  addAklat,
+}) => {
   return (
     <Modal
       visible={modalVisible}
@@ -37,8 +28,8 @@ const AklatanModal = ({ modalVisible, setModalVisible, setAklatan }) => {
             style={styles.input}
             placeholder='...'
             placeholderTextColor='#aaa'
-            value={temp}
-            onChangeText={setTemp}
+            value={newAklat}
+            onChangeText={setNewAklat}
           />
           <View style={styles.modalButtons}>
             <TouchableOpacity
@@ -47,7 +38,7 @@ const AklatanModal = ({ modalVisible, setModalVisible, setAklatan }) => {
             >
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.saveButton} onPress={addTala}>
+            <TouchableOpacity style={styles.saveButton} onPress={addAklat}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
