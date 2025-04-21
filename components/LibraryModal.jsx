@@ -7,12 +7,12 @@ import {
   TextInput,
 } from 'react-native';
 
-const AklatanModal = ({
+const LibraryModal = ({
   modalVisible,
   setModalVisible,
-  newAklat,
-  setNewAklat,
-  addAklat,
+  newBook,
+  setNewBook,
+  addBook,
 }) => {
   return (
     <Modal
@@ -28,8 +28,8 @@ const AklatanModal = ({
             style={styles.input}
             placeholder='...'
             placeholderTextColor='#aaa'
-            value={newAklat}
-            onChangeText={setNewAklat}
+            value={newBook}
+            onChangeText={setNewBook}
           />
           <View style={styles.modalButtons}>
             <TouchableOpacity
@@ -38,7 +38,7 @@ const AklatanModal = ({
             >
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.saveButton} onPress={addAklat}>
+            <TouchableOpacity style={styles.saveButton} onPress={addBook}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AklatanModal;
+export default LibraryModal;

@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 
-const KoleksyonLayout = () => {
+const LibraryLayout = () => {
   return (
     <Stack
       screenOptions={{
@@ -10,4 +10,4 @@ const KoleksyonLayout = () => {
   );
 };
 
-export default KoleksyonLayout;
+export default LibraryLayout;

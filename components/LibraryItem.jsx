@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useState, useRef } from 'react';
 
-const AklatanItem = ({ item, onEdit, onDelete }) => {
+const LibraryItem = ({ item, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(item.title);
 
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AklatanItem;
+export default LibraryItem;

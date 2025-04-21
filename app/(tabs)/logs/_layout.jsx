@@ -1,6 +1,6 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
-const TalaanLayout = () => {
+const LogsLayout = () => {
   return (
     <Stack
       screenOptions={{
@@ -10,4 +10,4 @@ const TalaanLayout = () => {
   );
 };
 
-export default TalaanLayout;
+export default LogsLayout;

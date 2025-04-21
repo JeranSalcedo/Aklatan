@@ -2,10 +2,10 @@ import databaseService from './databaseService';
 import { ID } from 'react-native-appwrite';
 
 const databaseId = process.env.EXPO_PUBLIC_APPWRITE_DB_ID;
-const collectionId = process.env.EXPO_PUBLIC_APPWRITE_COL_AKLAT_ID;
+const collectionId = process.env.EXPO_PUBLIC_APPWRITE_COL_BOOKS_ID;
 
-const aklatService = {
-  async addAklat(title, author) {
+const booksService = {
+  async addBook(title, author) {
     if (!title) {
       return { error: '[ERROR] Title field cannot be empty.' };
     }
@@ -25,7 +25,7 @@ const aklatService = {
     return { data: response };
   },
 
-  async getAklat() {
+  async getBooks() {
     const response = await databaseService.listDocuments(
       databaseId,
       collectionId
@@ -38,7 +38,7 @@ const aklatService = {
     return { data: response };
   },
 
-  async updateAklat(id, data) {
+  async updateBook(id, data) {
     const response = await databaseService.updateDocument(
       databaseId,
       collectionId,
@@ -53,7 +53,7 @@ const aklatService = {
     return { data: response };
   },
 
-  async deleteAklat(id) {
+  async deleteBook(id) {
     const response = await databaseService.deleteDocument(
       databaseId,
       collectionId,
@@ -68,4 +68,4 @@ const aklatService = {
   },
 };
 
-export default aklatService;
+export default booksService;

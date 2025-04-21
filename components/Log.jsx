@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-const Tala = ({ item }) => {
+const Log = ({ item }) => {
   return (
     <View style={styles.item}>
       <Text style={styles.itemText}>{item.text}</Text>
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Tala;
+export default Log;

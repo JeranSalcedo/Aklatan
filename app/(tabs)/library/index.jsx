@@ -8,80 +8,80 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 
-import Aklatan from '@/components/Aklatan';
-import AklatanModal from '@/components/AklatanModal';
+import Library from '@/components/Library';
+import LibraryModal from '@/components/LibraryModal';
 
-import aklatService from '@/services/aklatService';
+import booksService from '@/services/booksService';
 
-const KoleksyonScreen = () => {
-  const [aklatan, setAklatan] = useState([]);
+const LibraryScreen = () => {
+  const [library, setLibrary] = useState([]);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [newAklat, setNewAklat] = useState('');
+  const [newBook, setNewBook] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchAklat();
+    fetchBooks();
   }, []);
 
-  const addAklat = async () => {
-    if (newAklat.trim() === '') return;
+  const addBook = async () => {
+    if (newBook.trim() === '') return;
 
-    const response = await aklatService.addAklat(newAklat, '');
+    const response = await booksService.addBook(newBook, '');
 
     if (response.error) {
       setError(response.error);
       Alert.alert('[ERROR]', response.error);
     } else {
-      setAklatan([...aklatan, response.data]);
+      setLibrary([...library, response.data]);
       setError(null);
     }
 
-    setNewAklat('');
+    setNewBook('');
     setModalVisible(false);
   };
 
-  const fetchAklat = async () => {
+  const fetchBooks = async () => {
     setLoading(true);
 
-    const response = await aklatService.getAklat();
+    const response = await booksService.getBooks();
 
     if (response.error) {
       setError(response.error);
       Alert.alert('[ERROR]', response.error);
     } else {
-      setAklatan(response.data);
+      setLibrary(response.data);
       setError(null);
     }
 
     setLoading(false);
   };
 
-  const updateAklat = async (id, data) => {
+  const updateBook = async (id, data) => {
     if (!data.title.trim()) {
       Alert.alert('[ERROR]', 'New title cannot be empty.');
 
       return;
     }
 
-    const response = await aklatService.updateAklat(id, data);
+    const response = await booksService.updateBook(id, data);
 
     if (response.error) {
       setError(response.error);
       Alert.alert('[ERROR]', response.error);
     } else {
-      setAklatan((previousAklatan) =>
-        previousAklatan.map((aklat) =>
-          aklat.$id === id ? { ...data, $id: id } : aklat
+      setLibrary((previousLibrary) =>
+        previousLibrary.map((book) =>
+          book.$id === id ? { ...data, $id: id } : book
         )
       );
       setError(null);
     }
   };
 
-  const deleteAklat = async (id, title) => {
+  const deleteBook = async (id, title) => {
     Alert.alert('Confirm deletion', `Delete ${title}?`, [
       {
         text: 'Cancel',
@@ -91,13 +91,13 @@ const KoleksyonScreen = () => {
         text: 'Delete',
         style: 'destructive',
         onPress: async () => {
-          const response = await aklatService.deleteAklat(id);
+          const response = await booksService.deleteBook(id);
 
           if (response.error) {
             setError(response.error);
             Alert.alert('[ERROR]', response.error);
           } else {
-            setAklatan(aklatan.filter((aklat) => aklat.$id !== id));
+            setLibrary(library.filter((book) => book.$id !== id));
             setError(null);
           }
         },
@@ -112,10 +112,10 @@ const KoleksyonScreen = () => {
       ) : (
         <>
           {error && <Text style={styles.errorText}>{error}</Text>}
-          <Aklatan
-            aklatan={aklatan}
-            onEdit={updateAklat}
-            onDelete={deleteAklat}
+          <Library
+            library={library}
+            onEdit={updateBook}
+            onDelete={deleteBook}
           />
         </>
       )}
@@ -127,12 +127,12 @@ const KoleksyonScreen = () => {
         <Text style={styles.addButtonText}>+ Add</Text>
       </TouchableOpacity>
 
-      <AklatanModal
+      <LibraryModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        newAklat={newAklat}
-        setNewAklat={setNewAklat}
-        addAklat={addAklat}
+        newBook={newBook}
+        setNewBook={setNewBook}
+        addBook={addBook}
       />
     </View>
   );
@@ -167,4 +167,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default KoleksyonScreen;
+export default LibraryScreen;

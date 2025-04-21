@@ -35,9 +35,9 @@ const RootLayout = () => {
         }}
       />
       <Tabs.Screen
-        name='koleksyon'
+        name='library'
         options={{
-          title: 'Koleksyon',
+          title: 'Library',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? 'book' : 'book-outline'}
@@ -48,9 +48,9 @@ const RootLayout = () => {
         }}
       />
       <Tabs.Screen
-        name='talaan'
+        name='logs'
         options={{
-          title: 'Talaan',
+          title: 'Logs',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? 'document' : 'document-text-outline'}

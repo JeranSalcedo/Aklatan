@@ -13,16 +13,16 @@ const HomeScreen = () => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push('/koleksyon')}
+        onPress={() => router.push('/library')}
       >
-        <Text style={styles.buttonText}>Koleksyon</Text>
+        <Text style={styles.buttonText}>Library</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push('/talaan')}
+        onPress={() => router.push('/logs')}
       >
-        <Text style={styles.buttonText}>Talaan</Text>
+        <Text style={styles.buttonText}>Logs</Text>
       </TouchableOpacity>
     </View>
   );

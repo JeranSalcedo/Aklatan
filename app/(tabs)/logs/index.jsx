@@ -1,18 +1,18 @@
 import { View, StyleSheet } from 'react-native';
 import { useState } from 'react';
 
-import Talaan from '@/components/Talaan';
+import Logs from '@/components/Logs';
 
-const TalaanScreen = () => {
-  const [talaan, setTalaan] = useState([
-    { id: '1', text: 'tala_1' },
-    { id: '2', text: 'tala_2' },
-    { id: '3', text: 'tala_3' },
+const LogsScreen = () => {
+  const [logs, setLogs] = useState([
+    { id: '1', text: 'log_1' },
+    { id: '2', text: 'log_2' },
+    { id: '3', text: 'log_3' },
   ]);
 
   return (
     <View style={styles.container}>
-      <Talaan talaan={talaan} />
+      <Logs logs={logs} />
     </View>
   );
 };
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TalaanScreen;
+export default LogsScreen;
