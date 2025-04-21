@@ -13,7 +13,10 @@ const RootLayout = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name='auth' options={{ headerTitle: 'Login' }} />
+        <Stack.Screen
+          name='auth'
+          options={{ headerTitle: 'Login', headerShown: false }}
+        />
         <Stack.Screen name='not-found' options={{ headerShown: false }} />
       </Stack>
     </AuthProvider>
