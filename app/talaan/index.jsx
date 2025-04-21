@@ -18,6 +18,18 @@ const Talaan = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [temp, setTemp] = useState('');
 
+  const addTala = () => {
+    if (temp.trim() === '') return;
+
+    setTalaan((allTala) => [
+      ...allTala,
+      { id: allTala.length + 1, text: temp },
+    ]);
+
+    setTemp('');
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -60,10 +72,7 @@ const Talaan = () => {
               >
                 <Text style={styles.cancelButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.saveButton}
-                onPress={() => setModalVisible(false)}
-              >
+              <TouchableOpacity style={styles.saveButton} onPress={addTala}>
                 <Text style={styles.saveButtonText}>Save</Text>
               </TouchableOpacity>
             </View>
