@@ -8,6 +8,7 @@ const RootLayout = () => {
         headerStyle: {
           backgroundColor: '#5e4646',
         },
+        headerShadowVisible: false,
         headerTintColor: '#f3c9b1',
         headerTitleStyle: {
           fontSize: 20,
