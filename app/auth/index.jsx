@@ -6,13 +6,45 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import { useRouter } from 'expo-router';
+
+import { useAuth } from '@/contexts/AuthContext';
 
 const AuthScreen = () => {
+  const { login, register } = useAuth();
+  const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(false);
+
+  const handleAuth = async () => {
+    if (!email.trim() || !password.trim()) {
+      setError('Email and password are required.');
+
+      return;
+    }
+
+    if (!isLogin && password !== confirmPassword) {
+      setError('Passwords do not match.');
+
+      return;
+    }
+
+    const response = isLogin
+      ? await login(email, password)
+      : await register(email, password);
+
+    if (response?.error) {
+      Alert.alert('Error', response.error);
+
+      return;
+    }
+
+    router.replace('/');
+  };
 
   return (
     <View style={styles.container}>
@@ -36,6 +68,7 @@ const AuthScreen = () => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        textContentType='none'
       />
       {isLogin ? null : (
         <TextInput
@@ -45,10 +78,11 @@ const AuthScreen = () => {
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           secureTextEntry
+          textContentType='none'
         />
       )}
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleAuth}>
         <Text style={styles.buttonText}>
           {isLogin ? 'Login' : 'Request account'}
         </Text>
