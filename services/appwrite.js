@@ -6,7 +6,7 @@ const config = {
   projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
   database: process.env.EXPO_PUBLIC_APPWRITE_DB_ID,
   collections: {
-    aklat: process.env.EXPO_PUBLIC_APPWRITE_COL_AKLAT_ID,
+    books: process.env.EXPO_PUBLIC_APPWRITE_COL_BOOKS_ID,
   },
 };
 
