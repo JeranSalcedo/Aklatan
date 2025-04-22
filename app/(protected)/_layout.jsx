@@ -1,9 +1,17 @@
 import { Stack, Redirect } from 'expo-router';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
 
 import { useAuth } from '@/contexts/AuthContext';
 
 const ProtectedLayout = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading)
+    return (
+      <View style={styles.centeredContainer}>
+        <ActivityIndicator size='large' color='#db8c61' />
+      </View>
+    );
 
   return !user ? (
     <Redirect href='/auth' />
@@ -18,5 +26,13 @@ const ProtectedLayout = () => {
     </Stack>
   );
 };
+
+const styles = StyleSheet.create({
+  centeredContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+});
 
 export default ProtectedLayout;
