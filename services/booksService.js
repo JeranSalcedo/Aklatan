@@ -1,16 +1,16 @@
 import databaseService from './databaseService';
-import { ID } from 'react-native-appwrite';
+import { ID, Query } from 'react-native-appwrite';
 
 const databaseId = process.env.EXPO_PUBLIC_APPWRITE_DB_ID;
 const collectionId = process.env.EXPO_PUBLIC_APPWRITE_COL_BOOKS_ID;
 
 const booksService = {
-  async addBook(title, author) {
+  async addBook(user_id, title, author) {
     if (!title) {
       return { error: '[ERROR] Title field cannot be empty.' };
     }
 
-    const data = { title, author };
+    const data = { title, author, user_id };
     const response = await databaseService.createDocument(
       databaseId,
       collectionId,
@@ -25,17 +25,26 @@ const booksService = {
     return { data: response };
   },
 
-  async getBooks() {
-    const response = await databaseService.listDocuments(
-      databaseId,
-      collectionId
-    );
+  async getBooks(user_id) {
+    if (!user_id) {
+      console.error('[ERROR] Missing user_id in getBooks().');
 
-    if (response.error) {
-      return { error: response.error };
+      return { data: [], error: 'user_id is missing.' };
     }
 
-    return { data: response };
+    try {
+      const response = await databaseService.listDocuments(
+        databaseId,
+        collectionId,
+        [Query.equal('user_id', user_id)]
+      );
+
+      return response;
+    } catch (error) {
+      console.log('[ERROR] Failed to fetch books:', error.message);
+
+      return { data: [], error: error.message };
+    }
   },
 
   async updateBook(id, data) {

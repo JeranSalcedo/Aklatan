@@ -18,15 +18,19 @@ const databaseService = {
     }
   },
 
-  async listDocuments(databaseId, collectionId) {
+  async listDocuments(databaseId, collectionId, queries = []) {
     try {
-      const response = await database.listDocuments(databaseId, collectionId);
+      const response = await database.listDocuments(
+        databaseId,
+        collectionId,
+        queries
+      );
 
-      return response.documents || [];
+      return { data: response.documents || [], error: null };
     } catch (error) {
       console.error('[ERROR] Failed to fetch documents:', error.message);
 
-      return { error: error.message };
+      return { data: [], error: error.message };
     }
   },
 

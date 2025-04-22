@@ -8,12 +8,16 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 
+import { useAuth } from '@/contexts/AuthContext';
+
 import Library from '@/components/Library';
 import LibraryModal from '@/components/LibraryModal';
 
 import booksService from '@/services/booksService';
 
 const LibraryScreen = () => {
+  const { user } = useAuth();
+
   const [library, setLibrary] = useState([]);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -23,15 +27,15 @@ const LibraryScreen = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // if (user) {
-    fetchBooks();
-    // }
-  }, []);
+    if (user) {
+      fetchBooks();
+    }
+  }, [user]);
 
   const addBook = async () => {
     if (newBook.trim() === '') return;
 
-    const response = await booksService.addBook(newBook, '');
+    const response = await booksService.addBook(user.$id, newBook, '');
 
     if (response.error) {
       setError(response.error);
@@ -48,7 +52,7 @@ const LibraryScreen = () => {
   const fetchBooks = async () => {
     setLoading(true);
 
-    const response = await booksService.getBooks();
+    const response = await booksService.getBooks(user.$id);
 
     if (response.error) {
       setError(response.error);
@@ -114,11 +118,15 @@ const LibraryScreen = () => {
       ) : (
         <>
           {error && <Text style={styles.errorText}>{error}</Text>}
-          <Library
-            library={library}
-            onEdit={updateBook}
-            onDelete={deleteBook}
-          />
+          {library.length === 0 ? (
+            <Text style={styles.emptyText}>Your library is empty.</Text>
+          ) : (
+            <Library
+              library={library}
+              onEdit={updateBook}
+              onDelete={deleteBook}
+            />
+          )}
         </>
       )}
 
@@ -170,6 +178,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
     fontSize: 16,
+  },
+  emptyText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#c8c8c8',
+    marginTop: 15,
   },
 });
 
