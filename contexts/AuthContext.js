@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     await checkUser();
-
     return { success: true };
   };
 

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 
@@ -21,6 +22,7 @@ const AuthScreen = () => {
   const [error, setError] = useState(false);
 
   const handleAuth = async () => {
+    setError(false);
     if (!email.trim() || !password.trim()) {
       setError('Email and password are required.');
 

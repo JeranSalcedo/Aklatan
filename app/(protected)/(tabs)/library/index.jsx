@@ -7,9 +7,6 @@ import {
   Alert,
 } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'expo-router';
-
-import { useAuth } from '@/contexts/AuthContext';
 
 import Library from '@/components/Library';
 import LibraryModal from '@/components/LibraryModal';
@@ -17,9 +14,6 @@ import LibraryModal from '@/components/LibraryModal';
 import booksService from '@/services/booksService';
 
 const LibraryScreen = () => {
-  const router = useRouter();
-  const { user, loading: authLoading } = useAuth();
-
   const [library, setLibrary] = useState([]);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,16 +23,10 @@ const LibraryScreen = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!authLoading && !user) {
-      router.replace('/auth');
-    }
-  }, [user, authLoading]);
-
-  useEffect(() => {
-    if (user) {
-      fetchBooks();
-    }
-  }, [user]);
+    // if (user) {
+    fetchBooks();
+    // }
+  }, []);
 
   const addBook = async () => {
     if (newBook.trim() === '') return;

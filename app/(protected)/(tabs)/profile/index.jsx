@@ -1,18 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useEffect } from 'react';
-import { useRouter } from 'expo-router';
 
 import { useAuth } from '@/contexts/AuthContext';
 
 const ProfileScreen = () => {
-  const router = useRouter();
-  const { user, loading: authLoading, logout } = useAuth();
-
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.replace('/auth');
-    }
-  }, [user, authLoading]);
+  const { user, logout } = useAuth();
 
   return user ? (
     <View style={styles.container}>
