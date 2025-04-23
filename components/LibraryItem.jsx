@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { useState, useRef } from 'react';
 
+import { Ionicons } from '@expo/vector-icons';
+
 const LibraryItem = ({ item, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(item.title);
@@ -50,15 +52,21 @@ const LibraryItem = ({ item, onEdit, onDelete }) => {
               inputRef.current?.blur();
             }}
           >
-            <Text style={styles.edit}>💾</Text>
+            <Text style={styles.edit}>
+              <Ionicons name='save-outline' color='#555' size={20} />
+            </Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={() => setIsEditing(true)}>
-            <Text style={styles.edit}>✏️</Text>
+            <Text style={styles.edit}>
+              <Ionicons name='pencil-outline' color='#555' size={20} />
+            </Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity onPress={() => onDelete(item.$id, item.title)}>
-          <Text style={styles.delete}>❌</Text>
+          <Text style={styles.delete}>
+            <Ionicons name='trash-outline' color='#555' size={20} />
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
