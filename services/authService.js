@@ -33,14 +33,6 @@ const authService = {
     }
   },
 
-  async getSession() {
-    try {
-      return await account.getSession('current');
-    } catch (error) {
-      return null;
-    }
-  },
-
   async logout() {
     try {
       await account.deleteSession('current');

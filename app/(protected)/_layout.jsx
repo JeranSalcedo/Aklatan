@@ -4,7 +4,7 @@ import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { useAuth } from '@/contexts/AuthContext';
 
 const ProtectedLayout = () => {
-  const { session, loading } = useAuth();
+  const { user, loading } = useAuth();
 
   if (loading)
     return (
@@ -13,7 +13,7 @@ const ProtectedLayout = () => {
       </View>
     );
 
-  return !session ? (
+  return !user ? (
     <Redirect href='/auth' />
   ) : (
     <Stack>

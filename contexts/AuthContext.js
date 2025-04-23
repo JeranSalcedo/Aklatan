@@ -6,28 +6,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkSession();
+    checkUser();
   }, []);
 
-  const checkSession = async () => {
-    const response = await authService.getSesssion();
-
-    if (response?.error) {
-      setSession(null);
-    } else {
-      setSession(response);
-    }
-
-    await checkUser();
-  };
-
   const checkUser = async () => {
-    setLoading(true);
-
     const response = await authService.getUser();
 
     if (response?.error) {
@@ -47,8 +32,6 @@ export const AuthProvider = ({ children }) => {
       return response;
     }
 
-    setSession(response);
-
     await checkUser();
     return { success: true };
   };
@@ -67,19 +50,11 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     await authService.logout();
 
-    if (response?.error) {
-      return response;
-    }
-
-    setUser(null);
-    setSession(null);
     await checkUser();
   };
 
   return (
-    <AuthContext.Provider
-      value={{ session, user, login, register, logout, loading }}
-    >
+    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
