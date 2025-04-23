@@ -12,6 +12,7 @@ import { useAuth } from '@/contexts/AuthContext';
 
 import Library from '@/components/Library';
 import LibraryModal from '@/components/LibraryModal';
+import ViewSwitch from '@/components/ViewSwitch';
 
 import booksService from '@/services/booksService';
 
@@ -25,6 +26,8 @@ const LibraryScreen = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [viewMode, setViewMode] = useState(0);
 
   useEffect(() => {
     if (user) {
@@ -113,6 +116,9 @@ const LibraryScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.viewSwitch}>
+        <ViewSwitch viewMode={viewMode} setViewMode={setViewMode} />
+      </View>
       {loading ? (
         <ActivityIndicator size='large' color='#db8c61' />
       ) : (
@@ -185,6 +191,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#c8c8c8',
     marginTop: 15,
+  },
+  viewSwitch: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginBottom: 10,
   },
 });
 
