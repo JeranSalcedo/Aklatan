@@ -54,7 +54,7 @@ const TabLayout = () => {
           title: 'Logs',
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-              name={focused ? 'document' : 'document-text-outline'}
+              name={focused ? 'document-text' : 'document-text-outline'}
               color={color}
               size={20}
             />
